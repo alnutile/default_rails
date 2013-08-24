@@ -6,7 +6,11 @@
         <ul class="nav pull-right">
           <li><%= link_to "Home",    '#' %></li>
           <li><%= link_to "About",    '#' %></li>
-          <li><%= link_to "Sign in", '#' %></li>
+          <% if current_user.blank? %>
+            <li><%= link_to "Sign in", new_user_session_path %></li>
+          <% else %>
+            <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+          <% end %>
         </ul>
       </nav>
     </div>

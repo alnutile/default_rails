@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Static Pages: " do
-  describe "General tests " do
     #
     #before do
     #  #@user = FactoryGirl.create(:user, :email => Faker::Internet.email)
@@ -59,29 +58,24 @@ describe "Static Pages: " do
     #  end
     #end
 
-
-
-    describe "Authenticated User Tests" do
-      #it "Check that Sees welcome message " do
-      #  visit dashboard_path
-      #  expect(page).to have_content('Take a survey')
-      #  expect(page).to have_content('No Survey taken yet!..')
-      #end
-
-
-      #describe "User needs unique email" do
-      #  it "Should not let them sign up" do
-      #    click_link "Logout"
-      #    visit  new_user_registration_path
-      #    fill_in "user_email", :with => @user.email
-      #    fill_in "user_password", :with => 'welcome'
-      #    fill_in "user_password_confirmation", :with => 'welcome'
-      #    click_button "Sign up"
-      #    expect(page).to have_content('Email has already been taken')
-      #  end
-      #end
-
-    end
-
-  end
+  #describe "Authenticated User Tests" do
+  #    #it "Check that Sees welcome message " do
+  #    #  visit dashboard_path
+  #    #  expect(page).to have_content('Take a survey')
+  #    #  expect(page).to have_content('No Survey taken yet!..')
+  #    #end
+  #
+  #
+  #    #describe "User needs unique email" do
+  #    #  it "Should not let them sign up" do
+  #    #    click_link "Logout"
+  #    #    visit  new_user_registration_path
+  #    #    fill_in "user_email", :with => @user.email
+  #    #    fill_in "user_password", :with => 'welcome'
+  #    #    fill_in "user_password_confirmation", :with => 'welcome'
+  #    #    click_button "Sign up"
+  #    #    expect(page).to have_content('Email has already been taken')
+  #    #  end
+  #    #end
+  #  end
 end
