@@ -27,21 +27,13 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    # role = [];
-    # @todo come back and make this so I can just pass the params
-    @user = User.new
-
-    if check_email(params[:profile][:email]) == true
-      flash[:error] = "Email Already in System"
-      render :action => "new"
-      return
-    end
+    logger.info("Profile: #{params}")
+    @user = User.new(params[:profile])
 
     if @user.save
-      redirect_to '/profiles', :notice => "User Created #{ActionController::Base.helpers.link_to @user.email, "/profiles/#{@user.id}/edit"} the api response #{response.inspect}".html_safe
+      redirect_to '/profiles', :notice => "User Created #{ActionController::Base.helpers.link_to @user.email, "/profiles/#{@user.id}/edit"}".html_safe
       return
     else
-      flash[:error] = "Something went wrong"
       render 'new'
     end
 
@@ -49,10 +41,6 @@ class ProfilesController < ApplicationController
 
   def profile_check?
     redirect_to new_user_session_path, :flash => ({ :error => 'You need to sign in to see this page.'}) unless current_user.present?
-  end
-
-  def check_email(email)
-    return true unless User.find_by_email(email).nil?
   end
 
 end

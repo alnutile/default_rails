@@ -47,6 +47,9 @@ describe "Profile Tests: " do
         expect(page).to have_content("testadd@example.com")
       end
 
+      # Delete User
+
+
     end
   end
 end

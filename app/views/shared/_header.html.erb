@@ -8,9 +8,9 @@
       </button>
       <%= link_to "Default Site", "#", :class => "navbar-brand" %>
     </div>
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse pull-right">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Home",    '#' %></li>
+        <li><%= link_to "Home",    dashboard_path %></li>
         <li><%= link_to "About",    '#' %></li>
         <% if current_user.blank? %>
             <li><%= link_to "Sign in", new_user_session_path %></li>
