@@ -4,6 +4,7 @@ gem 'rails', '3.2.14'
 gem 'bootstrap-sass', '2.1'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'devise'
+gem 'bootstrap-generators', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
