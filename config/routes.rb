@@ -3,6 +3,7 @@ DefaultRails::Application.routes.draw do
 
   get "static_pages/home"
   match 'dashboard' => 'static_pages#dashboard'
+  resources :profiles
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
