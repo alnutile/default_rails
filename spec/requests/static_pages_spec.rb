@@ -58,12 +58,16 @@ describe "Static Pages: " do
     #  end
     #end
 
-  #describe "Authenticated User Tests" do
-  #    #it "Check that Sees welcome message " do
-  #    #  visit dashboard_path
-  #    #  expect(page).to have_content('Take a survey')
-  #    #  expect(page).to have_content('No Survey taken yet!..')
-  #    #end
+  describe "Authenticated User Tests" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+        sign_in(user)
+      end
+
+      it "Check that user sees welcome message " do
+        expect(page).to have_content('Signed in successfully.')
+      end
+
   #
   #
   #    #describe "User needs unique email" do
@@ -77,5 +81,5 @@ describe "Static Pages: " do
   #    #    expect(page).to have_content('Email has already been taken')
   #    #  end
   #    #end
-  #  end
+  end
 end

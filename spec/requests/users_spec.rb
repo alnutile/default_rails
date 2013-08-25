@@ -1,13 +1,14 @@
 require 'spec_helper'
 
 describe "Users Tests: " do
-  describe "General tests " do
+  let(:user) { FactoryGirl.create(:user, :email => Faker::Internet.email) }
 
-    before do
-      @user = FactoryGirl.create(:user, :email => Faker::Internet.email)
-      @user_other = FactoryGirl.create(:user, :email => Faker::Internet.email)
-      #Refinery::Page.create!(:title => 'est', :link_url => '/', :slug => "home", :show_in_menu => true)
-    end
+  describe "General tests " do
+    #@user_other = FactoryGirl.create(:user, :email => Faker::Internet.email)
+
+    #before do
+    #
+    #end
 
     # describe "Anonymous User" do
     # 	it "Should see and fill in form" do
@@ -60,12 +61,19 @@ describe "Users Tests: " do
 
 
     describe "Authenticated User Tests" do
+      before do
+        sign_in(user)
+      end
       #it "Check that Sees welcome message " do
       #  visit dashboard_path
       #  expect(page).to have_content('Take a survey')
       #  expect(page).to have_content('No Survey taken yet!..')
       #end
 
+      it "User can log out" do
+        sign_out
+        expect(page).to have_content('Signed out successfully.')
+      end
 
       #describe "User needs unique email" do
       #  it "Should not let them sign up" do

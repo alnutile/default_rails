@@ -2,14 +2,14 @@ FactoryGirl.factories.clear
 
 FactoryGirl.define do
 
-  #factory :user do
+  factory :user do
   #  now = Time.now.to_i
-  #  email Faker::Internet.email
+  email Faker::Internet.email
   #  first_name Faker::Name.name
   #  last_name Faker::Name.name
   #  zipcode Faker::Address.zip_code
   #  phone Faker::PhoneNumber.phone_number
-  #  password "password"
+  password "welcometest"
   #  password_confirmation "password"
   #
   #  factory :user_with_roles do
@@ -17,6 +17,6 @@ FactoryGirl.define do
   #    end
   #  end
   #
-  #end
+  end
 
 end
