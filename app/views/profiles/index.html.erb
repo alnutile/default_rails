@@ -13,7 +13,7 @@
   </tr>
   </thead>
   <% @users.each do |u| %>
-      <tr>
+      <tr class="user-<%= u.id %>">
         <td>
           <%= u.id %>
         </td>
@@ -24,7 +24,7 @@
           <%= link_to "edit", "/profiles/#{u.id}/edit", :class => "btn btn-info bnt-small" %>
         </td>
         <td>
-          <%= link_to 'Delete', "/profiles/#{u.id}", :method => :delete, :class => "btn btn-danger bnt-small", :confirm => 'Are you sure?' %>
+          <%= link_to 'Delete', "/profiles/#{u.id}", :method => :delete, :class => "btn btn-danger bnt-small user-#{u.id}", :confirm => 'Are you sure?' %>
         </td>
       </tr>
   <% end %>

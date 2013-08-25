@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_filter :profile_check?
 
   def index
-    @users = User.all
+    @users = User.order("id")
   end
 
   def edit
@@ -36,7 +36,12 @@ class ProfilesController < ApplicationController
     else
       render 'new'
     end
+  end
 
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to profiles_path
   end
 
   def profile_check?

@@ -47,8 +47,13 @@ describe "Profile Tests: " do
         expect(page).to have_content("testadd@example.com")
       end
 
-      # Delete User
-
+      it "Should allow user to be deleted" do
+        visit profiles_path
+        id = User.last.id
+        expect do
+          find("a.user-#{id}").click
+        end.to change(User, :count).by(-1)
+      end
 
     end
   end
