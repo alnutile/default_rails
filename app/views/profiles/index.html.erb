@@ -8,15 +8,12 @@
   <tr>
     <td>ID</td>
     <td>Email</td>
-    <td>First Name</td>
-    <td>Last Name</td>
-    <td>Main Role</td>
     <td>Edit</td>
     <td>Delete</td>
   </tr>
   </thead>
   <% @users.each do |u| %>
-      <tr>
+      <tr class="user-<%= u.id %>">
         <td>
           <%= u.id %>
         </td>
@@ -24,27 +21,10 @@
           <%= u.email %>
         </td>
         <td>
-          <%= u.first_name %>
+          <%= link_to "edit", "/profiles/#{u.id}/edit", :class => "btn btn-info bnt-small" %>
         </td>
         <td>
-          <%= u.last_name %>
-        </td>
-        <td>
-          <%= u.main_role %>
-        </td>
-        <td>
-          <% if check_if_can_edit_user_all?(u.main_role) %>
-              <%= link_to "edit", "/profiles/#{u.id}/edit", :class => "btn btn-info bnt-small" %>
-          <% else %>
-              <small>Higher Role Needed</small>
-          <% end %>
-        </td>
-        <td>
-          <% if check_if_can_edit_user_all?(u.main_role) %>
-              <%= link_to 'Delete', "/profiles/#{u.id}", :method => :delete, :class => "btn btn-danger bnt-small", :confirm => 'Are you sure?' %>
-          <% else %>
-              <small>Higher Role Needed</small>
-          <% end %>
+          <%= link_to 'Delete', "/profiles/#{u.id}", :method => :delete, :class => "btn btn-danger bnt-small user-#{u.id}", :confirm => 'Are you sure?' %>
         </td>
       </tr>
   <% end %>

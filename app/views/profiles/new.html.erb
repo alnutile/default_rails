@@ -1,9 +1,37 @@
-<div class="page-header">
-  <%= link_to profiles_path, :class => 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Back
-  <% end %>
-  <h1>New profile</h1>
-</div>
+<h1 class="text-center">Create User and Profile</h1>
+<div class="row">
+  <div id="edit_profile_form" class="span4">
+    <%= form_for @user, :as => :profile, :url => "/profiles", method: "post" do |f| %>
+        <%= render 'shared/errors', object: @user %>
+        <div id="member">
+          <fieldset>
+            <div>
 
-<%= render 'form' %>
+              <div class="control-group">
+                <label class="control-label"><%= f.label :email %></label>
+                <div class="controls">
+                  <%= f.email_field :email %>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label"><%= f.label :password %></label>
+                <div class="controls">
+                  <%= f.password_field :password %>&nbsp;
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label"><%= f.label :password_confirmation %></label>
+                <div class="controls">
+                  <%= f.password_field :password_confirmation %>
+                </div>
+              </div>
+
+             </div>
+          </fieldset>
+          <div id='submit'> <%= f.submit "Create User", :class => "btn btn-primary"  %> | <%= link_to "Back", '/profiles' %></div>
+        </div>
+    <%end%>
+  </div>
+</div>

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "Profile Tests: " do
   let(:user) { FactoryGirl.create(:user) }
+  let(:testuser) { FactoryGirl.create(:user, :email => Faker::Internet.email) }
 
   describe "Admin should choose a field and set all the roles: " do
 
@@ -19,67 +20,40 @@ describe "Profile Tests: " do
 
       it "Should be able to view the index page" do
         visit profiles_path
-        expect(page).to have_content("Profiles")
+        expect(page).to have_content("Manage Users")
       end
 
       #
-      #it "Should be able to edit a profile " do
-      #  sign_in(@user)
-      #  visit "/profiles/#{@testuser.id}/edit"
-      #  expect(page).to have_content('Edit User Profile')
-      #  select "Superuser", :from => "profile_main_role"
-      #  click_button("Update User")
-      #  expect(page).to have_content('The profile was updated with roles Superuser, Behavioralanalytics, Clientadviseradmin, Clientadviser, Refinery')
-      #end
-      #
-      #it "Should have only EndUser roles" do
-      #  sign_in(@user)
-      #  visit "/profiles/#{@testuser.id}/edit"
-      #  expect(page).to have_content('Edit User Profile')
-      #  select "Enduser", :from => "profile_main_role"
-      #  click_button("Update User")
-      #  expect(page).to have_content('The profile was updated with roles Enduser')
-      #end
-      #
-      #it "Client Adviser Admin should not be able to edit higher roles" do
-      #  sign_in(@user_client_adviser_roles)
-      #  visit "/profiles/#{@user.id}/edit"
-      #  expect(page).to have_content('You do not have permission to edit this person')
-      #end
-      #
-      #it "Client Adviser Admin should higher role needed on some lines to limit access to who they can edit" do
-      #  sign_in(@user_client_adviser_roles)
-      #  # move into new it block
-      #  visit "/profiles"
-      #  expect(page).to have_content('Higher Role Needed')
-      #end
-      #
-      #it "Client Adviser Admin should only see Clientadviser and Enduser in the select list and not the others" do
-      #  sign_in(@user_client_adviser_roles)
-      #  visit "/profiles/#{@testuser.id}/edit"
-      #  expect(page).to have_content('Edit User Profile')
-      #  page.has_select?('Select the Main Role', :with_options => ["Enduser", "Clientadviser"])
-      #  page.has_no_select?('Select the Main Role', :with_options => ["Superuser"])
-      #  select "Enduser", :from => "profile_main_role"
-      #  click_button("Update User")
-      #  expect(page).to have_content('The profile was updated with roles Enduser')
-      #end
-      #
-      #it "Should not let an end user see other profiles" do
-      #  sign_in(@testuser)
-      #  visit profiles_path
-      #  expect(page).to have_content('Sorry, you do not have permissions to see that page.')
-      #end
-      #
-      #it "Should not let anonymous user see other profiles" do
-      #  visit profiles_path
-      #  expect(page).to have_content('Sorry, you need to login to see this page')
-      #end
-      #
-      #it "Remove a user should remove the profile" do
-      #  sign_in(@user)
-      #  expect { @testuser.delete }.to change(User, :count).by(-1)
-      #end
+      it "Should be able to edit a profile " do
+        visit "/profiles/#{testuser.id}/edit"
+        expect(page).to have_content('Edit User Profile')
+        click_button("Update User")
+        expect(page).to have_content('The profile was updated.')
+      end
+
+      it "Should be able to change email " do
+        visit "/profiles/#{testuser.id}/edit"
+        fill_in "Email", with: "testemail@example.com"
+        click_button("Update User")
+        expect(page).to have_content("testemail@example.com")
+      end
+
+      it "Should be able to add user" do
+        visit new_profile_path
+        fill_in "Email", with: "testadd@example.com"
+        fill_in "Password", with: "welcome2013"
+        fill_in "Password confirmation", with: "welcome2013"
+        click_button("Create User")
+        expect(page).to have_content("testadd@example.com")
+      end
+
+      it "Should allow user to be deleted" do
+        visit profiles_path
+        id = User.last.id
+        expect do
+          find("a.user-#{id}").click
+        end.to change(User, :count).by(-1)
+      end
 
     end
   end
