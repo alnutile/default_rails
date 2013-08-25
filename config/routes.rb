@@ -1,9 +1,9 @@
 DefaultRails::Application.routes.draw do
+  resources :profiles
   devise_for :users
-
   get "static_pages/home"
   match 'dashboard' => 'static_pages#dashboard'
-  resources :profiles
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
